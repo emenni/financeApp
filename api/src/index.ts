@@ -16,11 +16,12 @@ const DI = {} as {
 
     await DI.orm.getSchemaGenerator().updateSchema();
 
-    DI.userRepository = DI.orm.em.getRepository(User);
+    DI.userRepository = DI.orm.em.fork().getRepository(User);
 
-    const user = DI.orm.em.create(User, { name: "Negrao Michel" });
+    const user = DI.orm.em.fork().create(User, { name: "Negrao Michel" });
 
     await DI.userRepository.persistAndFlush(user);
+
 
 })()
 
