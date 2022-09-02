@@ -1,32 +1,28 @@
-import "reflect-metadata";
-import "dotenv/config";
-import { MikroORM, EntityManager, EntityRepository } from "@mikro-orm/core";
-import { User } from '../src/entities/User'
-import { testConn } from './test-utils/testConn'
+import { MikroORM } from "@mikro-orm/core";
 
-
-//jest.mock('MikroORM')
 
 describe('database server loader', () => {
 
-    const MockOrm = { em: { getRepository: jest.fn() } };
 
     beforeEach(() => {
-        jest.spyOn(MikroORM, 'init').mockResolvedValue(MockOrm as any);
     });
 
     afterEach(() => {
         (MikroORM.init as jest.Mock).mockRestore();
-        MockOrm.em.getRepository.mockRestore();
     });
 
-    it('should connect to database', async () => {
+    it('should load mikro-orm instance', async () => {
 
         // given/when
-        await testConn();
+        //const mocked = jest.spyOn(MikroORM, "init")
+        let spy = MikroORM.init({}); // mocked method on mocked module
+        //console.log('mock instances', typeof MikroORM.init.valueOf(), MikroORM.init.valueOf())
+        console.log('mock instances', typeof spy)
+
 
         // then
-        expect(MikroORM.init).toHaveBeenCalledTimes(1);
+        // expect(MikroORM.init).toHaveBeenCalledTimes(1);
+        // expect(spy).toBeInstanceOf(MikroORM.init);
 
     });
 })

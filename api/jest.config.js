@@ -6,6 +6,8 @@ module.exports = {
   // The test environment that will be used for testing
   testEnvironment: "node",
 
+  //collectCoverage: true,
+
   // An array of glob patterns indicating a set of files for which coverage information should be collected
   collectCoverageFrom: ["<rootDir>/src/**/*.ts"],
 
@@ -35,4 +37,8 @@ module.exports = {
 
   // Indicates whether each individual test should be reported during the run
   verbose: true,
+
+  transformIgnorePatterns: ["<rootDir>/node_modules/(?!mikro-orm)"],
+
+  resetMocks: false,
 };

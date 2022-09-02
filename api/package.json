@@ -35,6 +35,6 @@
   },
   "scripts": {
     "db:setup": "ts-node ./tests/test-utils/setup.ts",
-    "test": "npm run db:setup && jest"
+    "test": "jest -i"
   }
 }
